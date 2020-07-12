@@ -11,13 +11,13 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>RecipeApplication</name>
+    <name>Recipe</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>2.0.11</dropwizard.version>
-        <mainClass>mchaitin.RecipeApplicationApplication</mainClass>
+        <mainClass>mchaitin.RecipeApplication</mainClass>
     </properties>
 
     <dependencyManagement>
