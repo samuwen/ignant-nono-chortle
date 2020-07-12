@@ -2,18 +2,20 @@ package mchaitin.health;
 
 import com.codahale.metrics.health.HealthCheck;
 
-public class TemplateHealthCheck extends HealthCheck {
-    private final String template;
+import mchaitin.core.Recipe;
 
-    public TemplateHealthCheck(String template) {
-        this.template = template;
+public class TemplateHealthCheck extends HealthCheck {
+    private final Recipe recipe;
+
+    public TemplateHealthCheck(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Override
     protected Result check() throws Exception {
-        final String saying = String.format(template, "TEST");
-        if (!saying.contains("TEST")) {
-            return Result.unhealthy("Template doesn't include a name!");
+        // TODO: Make this not suck
+        if (this.recipe.getName().isEmpty()) {
+            return Result.unhealthy("No name found for recipe");
         }
         return Result.healthy();
     }

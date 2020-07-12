@@ -1,0 +1,49 @@
+{
+  "name": "pasta",
+  "id": 1,
+  "description": "This delicious pasta has no sauce because you are poor",
+  "directions": [
+    "Add salt to water",
+    "Boil salted water",
+    "Add pasta",
+    "When pasta starts getting soft, start tasting",
+    "Remove when al dente",
+    "Serve"
+  ],
+  "ingredients": [
+    {
+      "amount": 1,
+      "unit": "lb",
+      "name": "spaghetti"
+    },
+    {
+      "amount": 4,
+      "unit": "cups",
+      "name": "water"
+    },
+    {
+      "amount": 5,
+      "unit": "g",
+      "name": "salt"
+    }
+  ],
+  "image": "pasta.jpg",
+  "tags": [
+    {
+      "name": "main",
+      "ordinal": 0
+    },
+    {
+      "name": "entree",
+      "ordinal": 1
+    },
+    {
+      "name": "grain",
+      "ordinal": 2
+    },
+    {
+      "name": "vegetarian",
+      "ordinal": 3
+    }
+  ]
+}

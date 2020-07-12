@@ -4,7 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import mchaitin.health.TemplateHealthCheck;
-import mchaitin.resources.HelloWorldResource;
+import mchaitin.resources.RecipeResource;
 
 public class RecipeApplication extends Application<RecipeConfiguration> {
 
@@ -24,11 +24,10 @@ public class RecipeApplication extends Application<RecipeConfiguration> {
 
     @Override
     public void run(final RecipeConfiguration configuration, final Environment environment) {
-        final HelloWorldResource resource = new HelloWorldResource(configuration.getTemplate(),
-                configuration.getDefaultName());
-        final TemplateHealthCheck check = new TemplateHealthCheck(configuration.getTemplate());
+        final RecipeResource recipeResource = new RecipeResource();
+        final TemplateHealthCheck check = new TemplateHealthCheck(configuration.getRecipe());
         environment.healthChecks().register("template", check);
-        environment.jersey().register(resource);
+        environment.jersey().register(recipeResource);
     }
 
 }

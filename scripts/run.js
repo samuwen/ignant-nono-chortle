@@ -38,7 +38,7 @@ run_script("mvn", ["clean", "package"], (_, exitCode) => {
       "-jar",
       "target/ignant-nono-chortle-1.0-SNAPSHOT.jar",
       "server",
-      "hello-world.yml",
+      "config.yml",
     ],
     (_, code) => {
       console.log("\nProcess finished");
