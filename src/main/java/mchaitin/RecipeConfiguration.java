@@ -1,20 +1,26 @@
 package mchaitin;
 
 import io.dropwizard.Configuration;
-import mchaitin.core.Recipe;
+import io.dropwizard.db.DataSourceFactory;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RecipeConfiguration extends Configuration {
-    private Recipe recipe;
+    @Valid
+    @NotNull
+    @JsonProperty("database")
+    private DataSourceFactory database = new DataSourceFactory();
 
     @JsonProperty
-    public Recipe getRecipe() {
-        return this.recipe;
+    public void setDataSourceFactory(DataSourceFactory database) {
+        this.database = database;
     }
 
     @JsonProperty
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public DataSourceFactory getDataSourceFactory() {
+        return this.database;
     }
 }

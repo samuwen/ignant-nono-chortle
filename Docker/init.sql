@@ -22,3 +22,4 @@ CREATE TABLE tag (
     ordinal INTEGER NOT NULL,
     recipe_id INTEGER REFERENCES recipe(id)
 );
+INSERT INTO recipe (id, name) VALUES(1, 'pasta');
