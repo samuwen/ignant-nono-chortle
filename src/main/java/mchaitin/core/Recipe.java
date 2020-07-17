@@ -4,16 +4,19 @@ import javax.annotation.Nullable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.NamedQueries;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "recipe")
-@NamedQueries({ @NamedQuery(name = "recipe.findAll", query = "from Recipe") })
+@NamedQuery(name = "recipe.findAll", query = "from Recipe")
 public class Recipe {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false)
     private long id;
 
     @Column(name = "name", nullable = false)

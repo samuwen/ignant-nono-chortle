@@ -1,8 +1,14 @@
 package mchaitin.resources;
 
 import java.util.List;
+import java.util.OptionalLong;
+
+import javax.validation.Valid;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -33,12 +39,21 @@ public class RecipeResource {
         return this.recipeDAO.findAll();
     }
 
-    // @GET
-    // @Path("{recipeId}")
-    // @Timed
-    // public Recipe getRecipe(@PathParam("recipeId") OptionalLong recipeId) {
-    // return this.recipes.get((int) recipeId.getAsLong());
-    // }
+    @GET
+    @Path("{recipeId}")
+    @Timed
+    @UnitOfWork
+    public Recipe getRecipe(@PathParam("recipeId") OptionalLong recipeId) {
+        return this.recipeDAO.findById(recipeId.getAsLong())
+                .orElseThrow(() -> new NotFoundException("Recipe not found"));
+    }
+
+    @POST
+    @Timed
+    @UnitOfWork
+    public void createRecipe(@Valid Recipe recipe) {
+        this.recipeDAO.create(recipe);
+    }
 
     // @POST
     // @Timed

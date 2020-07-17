@@ -22,4 +22,5 @@ CREATE TABLE tag (
     ordinal INTEGER NOT NULL,
     recipe_id INTEGER REFERENCES recipe(id)
 );
-INSERT INTO recipe (id, name) VALUES(1, 'pasta');
+create sequence hibernate_sequence start with 1 increment by 50;
+grant usage, select on all sequences in schema public to docker;
