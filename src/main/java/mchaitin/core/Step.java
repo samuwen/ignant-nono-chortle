@@ -1,10 +1,10 @@
 package mchaitin.core;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,9 +13,9 @@ import javax.persistence.Table;
 @Table(name = "step")
 public class Step {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "id", updatable = false)
-    private int id;
+    private UUID id;
 
     @Column(name = "text", nullable = false)
     private String text;
@@ -26,17 +26,17 @@ public class Step {
     public Step() {
     }
 
-    public Step(int id, String text, int ordinal) {
+    public Step(UUID id, String text, int ordinal) {
         this.id = id;
         this.text = text;
         this.ordinal = ordinal;
     }
 
-    public int getId() {
+    public UUID getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -56,7 +56,7 @@ public class Step {
         this.ordinal = ordinal;
     }
 
-    public Step id(int id) {
+    public Step id(UUID id) {
         this.id = id;
         return this;
     }
@@ -79,7 +79,7 @@ public class Step {
             return false;
         }
         Step step = (Step) o;
-        return id == step.id && Objects.equals(text, step.text) && ordinal == step.ordinal;
+        return Objects.equals(id, step.id) && Objects.equals(text, step.text) && ordinal == step.ordinal;
     }
 
     @Override
@@ -89,7 +89,6 @@ public class Step {
 
     @Override
     public String toString() {
-        return "{" + " id='" + getId() + "'" + ", text='" + getText() + "'" + ", ordinal='" + getOrdinal() + "'" + "'"
-                + "}";
+        return "{" + " id='" + getId() + "'" + ", text='" + getText() + "'" + ", ordinal='" + getOrdinal() + "'" + "}";
     }
 }

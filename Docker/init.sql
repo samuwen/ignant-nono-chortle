@@ -1,26 +1,24 @@
 CREATE TABLE recipe (
-    recipe_id INTEGER PRIMARY KEY,
+    recipe_id UUID PRIMARY KEY,
     name VARCHAR NOT NULL,
     description VARCHAR
 );
 CREATE TABLE ingredient (
-    id INTEGER PRIMARY KEY,
+    id UUID PRIMARY KEY,
     name VARCHAR NOT NULL,
     amount INTEGER NOT NULL,
     unit VARCHAR NOT NULL,
-    recipe_id INTEGER REFERENCES recipe(recipe_id)
+    recipe_id UUID REFERENCES recipe(recipe_id)
 );
 CREATE TABLE step (
-    id INTEGER PRIMARY KEY,
+    id UUID PRIMARY KEY,
     text TEXT NOT NULL,
     ordinal INTEGER NOT NULL,
-    recipe_id INTEGER REFERENCES recipe(recipe_id)
+    recipe_id UUID REFERENCES recipe(recipe_id)
 );
 CREATE TABLE tag (
-    id INTEGER PRIMARY KEY,
+    id UUID PRIMARY KEY,
     text VARCHAR NOT NULL,
     ordinal INTEGER NOT NULL,
-    recipe_id INTEGER REFERENCES recipe(recipe_id)
+    recipe_id UUID REFERENCES recipe(recipe_id)
 );
-create sequence hibernate_sequence start with 1 increment by 50;
-grant usage, select on all sequences in schema public to docker;

@@ -1,6 +1,7 @@
 package mchaitin.core;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 import javax.persistence.CascadeType;
@@ -19,9 +20,9 @@ import javax.persistence.Table;
 @NamedQuery(name = "recipe.findAll", query = "from Recipe")
 public class Recipe {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "recipe_id", updatable = false)
-    private long id;
+    @GeneratedValue
+    private UUID id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -38,11 +39,15 @@ public class Recipe {
     @JoinColumn(name = "recipe_id")
     private List<Step> steps;
 
-    public long getId() {
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
+    private List<Tag> tags;
+
+    public UUID getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -76,5 +81,13 @@ public class Recipe {
 
     public void setSteps(List<Step> steps) {
         this.steps = steps;
+    }
+
+    public List<Tag> getTags() {
+        return this.tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

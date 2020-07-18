@@ -39,14 +39,14 @@ public class RecipeResource {
         return this.recipeDAO.findAll();
     }
 
-    @GET
-    @Path("{recipeId}")
-    @Timed
-    @UnitOfWork
-    public Recipe getRecipe(@PathParam("recipeId") OptionalLong recipeId) {
-        return this.recipeDAO.findById(recipeId.getAsLong())
-                .orElseThrow(() -> new NotFoundException("Recipe not found"));
-    }
+    // @GET
+    // @Path("{recipeId}")
+    // @Timed
+    // @UnitOfWork
+    // public Recipe getRecipe(@PathParam("recipeId") OptionalLong recipeId) {
+    // return this.recipeDAO.findById(recipeId.getAsLong())
+    // .orElseThrow(() -> new NotFoundException("Recipe not found"));
+    // }
 
     @POST
     @Timed

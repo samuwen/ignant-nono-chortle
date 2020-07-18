@@ -1,11 +1,11 @@
 package mchaitin.core;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,9 +13,9 @@ import javax.persistence.Table;
 @Table(name = "ingredient")
 public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false)
-    private long id;
+    @GeneratedValue
+    private UUID id;
 
     @Column(name = "name")
     private String name;
@@ -29,18 +29,18 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public Ingredient(int id, String name, int amount, String unit) {
+    public Ingredient(UUID id, String name, int amount, String unit) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
     }
 
-    public long getId() {
+    public UUID getId() {
         return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -68,7 +68,7 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public Ingredient id(long id) {
+    public Ingredient id(UUID id) {
         this.id = id;
         return this;
     }
@@ -96,7 +96,7 @@ public class Ingredient {
             return false;
         }
         Ingredient ingredient = (Ingredient) o;
-        return id == ingredient.id && Objects.equals(name, ingredient.name) && amount == ingredient.amount
+        return Objects.equals(id, ingredient.id) && Objects.equals(name, ingredient.name) && amount == ingredient.amount
                 && Objects.equals(unit, ingredient.unit);
     }
 
