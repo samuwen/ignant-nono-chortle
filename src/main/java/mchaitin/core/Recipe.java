@@ -34,6 +34,10 @@ public class Recipe {
     @JoinColumn(name = "recipe_id")
     private List<Ingredient> ingredients;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
+    private List<Step> steps;
+
     public long getId() {
         return this.id;
     }
@@ -64,5 +68,13 @@ public class Recipe {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public List<Step> getSteps() {
+        return this.steps;
+    }
+
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
     }
 }

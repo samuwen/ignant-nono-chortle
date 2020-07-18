@@ -7,6 +7,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import mchaitin.core.Ingredient;
 import mchaitin.core.Recipe;
+import mchaitin.core.Step;
 import mchaitin.db.RecipeDAO;
 import mchaitin.health.TemplateHealthCheck;
 import mchaitin.resources.RecipeResource;
@@ -28,7 +29,7 @@ public class RecipeApplication extends Application<RecipeConfiguration> {
     }
 
     private HibernateBundle<RecipeConfiguration> hibernate = new HibernateBundle<RecipeConfiguration>(Recipe.class,
-            Ingredient.class) {
+            Ingredient.class, Step.class) {
         @Override
         public PooledDataSourceFactory getDataSourceFactory(RecipeConfiguration configuration) {
             return configuration.getDataSourceFactory();

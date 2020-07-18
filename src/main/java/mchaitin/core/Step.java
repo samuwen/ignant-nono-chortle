@@ -13,7 +13,8 @@ import javax.persistence.Table;
 @Table(name = "step")
 public class Step {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false)
     private int id;
 
     @Column(name = "text", nullable = false)
@@ -22,17 +23,13 @@ public class Step {
     @Column(name = "ordinal")
     private int ordinal;
 
-    @Column(name = "recipe_id", nullable = false)
-    private int recipeId;
-
     public Step() {
     }
 
-    public Step(int id, String text, int ordinal, int recipeId) {
+    public Step(int id, String text, int ordinal) {
         this.id = id;
         this.text = text;
         this.ordinal = ordinal;
-        this.recipeId = recipeId;
     }
 
     public int getId() {
@@ -59,14 +56,6 @@ public class Step {
         this.ordinal = ordinal;
     }
 
-    public int getRecipeId() {
-        return this.recipeId;
-    }
-
-    public void setRecipeId(int recipeId) {
-        this.recipeId = recipeId;
-    }
-
     public Step id(int id) {
         this.id = id;
         return this;
@@ -82,11 +71,6 @@ public class Step {
         return this;
     }
 
-    public Step recipeId(int recipeId) {
-        this.recipeId = recipeId;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -95,17 +79,17 @@ public class Step {
             return false;
         }
         Step step = (Step) o;
-        return id == step.id && Objects.equals(text, step.text) && ordinal == step.ordinal && recipeId == step.recipeId;
+        return id == step.id && Objects.equals(text, step.text) && ordinal == step.ordinal;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, text, ordinal, recipeId);
+        return Objects.hash(id, text, ordinal);
     }
 
     @Override
     public String toString() {
-        return "{" + " id='" + getId() + "'" + ", text='" + getText() + "'" + ", ordinal='" + getOrdinal() + "'"
-                + ", recipeId='" + getRecipeId() + "'" + "}";
+        return "{" + " id='" + getId() + "'" + ", text='" + getText() + "'" + ", ordinal='" + getOrdinal() + "'" + "'"
+                + "}";
     }
 }

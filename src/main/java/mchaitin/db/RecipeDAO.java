@@ -14,6 +14,7 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
         super(factory);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Recipe> findAll() {
         return list((Query<Recipe>) namedQuery("recipe.findAll"));
     }
