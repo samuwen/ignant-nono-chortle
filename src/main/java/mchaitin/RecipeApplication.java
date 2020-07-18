@@ -5,6 +5,7 @@ import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import mchaitin.core.Ingredient;
 import mchaitin.core.Recipe;
 import mchaitin.db.RecipeDAO;
 import mchaitin.health.TemplateHealthCheck;
@@ -26,7 +27,8 @@ public class RecipeApplication extends Application<RecipeConfiguration> {
         bootstrap.addBundle(hibernate);
     }
 
-    private HibernateBundle<RecipeConfiguration> hibernate = new HibernateBundle<RecipeConfiguration>(Recipe.class) {
+    private HibernateBundle<RecipeConfiguration> hibernate = new HibernateBundle<RecipeConfiguration>(Recipe.class,
+            Ingredient.class) {
         @Override
         public PooledDataSourceFactory getDataSourceFactory(RecipeConfiguration configuration) {
             return configuration.getDataSourceFactory();

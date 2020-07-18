@@ -2,18 +2,46 @@ package mchaitin.core;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ingredient")
 public class Ingredient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = false)
+    private long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "amount")
     private int amount;
+
+    @Column(name = "unit")
     private String unit;
 
     public Ingredient() {
     }
 
-    public Ingredient(String name, int amount, String unit) {
+    public Ingredient(int id, String name, int amount, String unit) {
+        this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
+    }
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -40,6 +68,11 @@ public class Ingredient {
         this.unit = unit;
     }
 
+    public Ingredient id(long id) {
+        this.id = id;
+        return this;
+    }
+
     public Ingredient name(String name) {
         this.name = name;
         return this;
@@ -63,18 +96,18 @@ public class Ingredient {
             return false;
         }
         Ingredient ingredient = (Ingredient) o;
-        return Objects.equals(name, ingredient.name) && amount == ingredient.amount
+        return id == ingredient.id && Objects.equals(name, ingredient.name) && amount == ingredient.amount
                 && Objects.equals(unit, ingredient.unit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, amount, unit);
+        return Objects.hash(id, name, amount, unit);
     }
 
     @Override
     public String toString() {
-        return "{" + " name='" + getName() + "'" + ", amount='" + getAmount() + "'" + ", unit='" + getUnit() + "'"
-                + "}";
+        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", amount='" + getAmount() + "'"
+                + ", unit='" + getUnit() + "'" + "}";
     }
 }

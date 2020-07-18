@@ -1,13 +1,17 @@
 package mchaitin.core;
 
-import javax.annotation.Nullable;
+import java.util.List;
 
+import javax.annotation.Nullable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +20,7 @@ import javax.persistence.Table;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", updatable = false)
+    @Column(name = "recipe_id", updatable = false)
     private long id;
 
     @Column(name = "name", nullable = false)
@@ -25,6 +29,10 @@ public class Recipe {
     @Column(name = "description")
     @Nullable
     private String description;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_id")
+    private List<Ingredient> ingredients;
 
     public long getId() {
         return this.id;
@@ -48,5 +56,13 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
